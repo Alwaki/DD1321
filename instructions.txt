@@ -1,0 +1,21 @@
+1. Sätt alla noders prioritet/kostnad till ∞ (i praktiken något maximalt värde)
+2. Sätt startnodens prioritet till 0.
+3. Stoppa in startnoden i en min-prioritetskö.
+
+Startnoden ligger nu först i kön. I fortsättningen kan noder mitt i prioritetskön behöva omprioriteras. Ett
+sätt att omprioritera är att införa en remove-funktion som tar bort en nod ur en prioritetskö. Det får inte bli ett "hål" utan i
+princip sker en upp- och nertrappning på ungefär samma sätt som vid isättning och urtagning från en prioritetskö.
+
+Den fortsatta algoritmen för att hitta billigaste vägen blir ungefär:
+
+1. Plocka ut en nod p från prioritetskön.
+2. Undersök noden p:s barn ett och ett
+    1. Räkna ut kostnaden att gå från p till barnet.
+    2. Om kostnaden är billigare än barnets nuvarande prioritet (från början var kostnaden ∞)
+        1. sätt om barnets prioritet till den nya kostnaden
+        2. sätt föräldrapekaren att peka på p
+        3. Omprioritera barnet genom att
+            1. plocka bort barnet ur prioritetskön
+            2. stoppa in barnet i prioritetskön
+3. Upprepa från 1. tills prioritetskön är tom (det går att avbryta tidigare när bättre vägar inte finns)
+4. Skriv ut billigaste vägen genom att följa föräldrapekarna från slutnoden till startnoden.
